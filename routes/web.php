@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\ItemController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,5 +16,24 @@ use Illuminate\Support\Facades\Route;
 
 // Base
 Route::get('/', function () {
-    return view('index');
+    return view('welcome');
 });
+
+// Admin
+Route::prefix("admin")->group(function() {
+    // Base
+    Route::get('/', function () {
+        return view('index');
+    });
+
+    // Item
+    Route::prefix("barang")->group(function() {
+        Route::controller(ItemController::class)->group(function() {
+            Route::get("/", "index")->name("admin.item.index");
+            Route::match(["get", "post"],"/buat", "create")->name("admin.item.create");
+            Route::match(["get", "post"],"/ubah/{id}", "update")->name("admin.item.update");
+            // Route::delete("/delete", "delete")->name("admin.item.delete");
+        });
+    });
+});
+// Item
