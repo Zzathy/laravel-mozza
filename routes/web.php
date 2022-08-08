@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ItemController;
+use App\Http\Controllers\Admin\TransactionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +34,16 @@ Route::prefix("admin")->group(function() {
             Route::match(["get", "post"],"/buat", "create")->name("admin.item.create");
             Route::match(["get", "post"],"/ubah/{id}", "update")->name("admin.item.update");
             // Route::delete("/delete", "delete")->name("admin.item.delete");
+        });
+    });
+
+    // Transaction
+    Route::prefix("transaksi")->group(function() {
+        Route::controller(TransactionController::class)->group(function() {
+            Route::get("/", "index")->name("admin.transaction.index");
+            Route::match(["get", "post"],"/buat", "create")->name("admin.transaction.create");
+            Route::match(["get", "post"],"/ubah/{id}", "update")->name("admin.transaction.update");
+            // Route::delete("/delete", "delete")->name("admin.transaction.delete");
         });
     });
 });

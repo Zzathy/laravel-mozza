@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Item;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 
-class ItemController extends Controller
+class TransactionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -35,10 +35,10 @@ class ItemController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Item  $item
+     * @param  \App\Models\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, Item $item)
+    public function edit(Request $request, Transaction $transaction)
     {
         if($request->isMethod("post")) {
             //
@@ -50,10 +50,10 @@ class ItemController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Item  $item
+     * @param  \App\Models\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Item $item)
+    public function destroy(Transaction $transaction)
     {
         //
     }
