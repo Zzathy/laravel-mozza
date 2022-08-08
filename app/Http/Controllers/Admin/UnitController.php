@@ -33,12 +33,13 @@ class UnitController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Update the specified resource in storage.
      *
-     * @param  \App\Models\Unit  $unit
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Unit  $type
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, Unit $unit)
+    public function update(Request $request, Unit $unit)
     {
         if($request->isMethod("post")) {
             //

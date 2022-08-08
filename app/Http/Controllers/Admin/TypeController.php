@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Transaction;
+use App\Models\Type;
 use Illuminate\Http\Request;
 
-class TransactionController extends Controller
+class TypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -36,10 +36,10 @@ class TransactionController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Transaction  $type
+     * @param  \App\Models\Type  $type
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Transaction $transaction)
+    public function update(Request $request, Type $type)
     {
         if($request->isMethod("post")) {
             //
@@ -51,10 +51,10 @@ class TransactionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Transaction  $transaction
+     * @param  \App\Models\Type  $type
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Transaction $transaction)
+    public function destroy(Type $type)
     {
         //
     }

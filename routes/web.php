@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ItemController;
 use App\Http\Controllers\Admin\TransactionController;
+use App\Http\Controllers\Admin\TypeController;
+use App\Http\Controllers\Admin\UnitController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,6 +46,16 @@ Route::prefix("admin")->group(function() {
             Route::match(["get", "post"],"/buat", "create")->name("admin.transaction.create");
             Route::match(["get", "post"],"/ubah/{id}", "update")->name("admin.transaction.update");
             // Route::delete("/delete", "delete")->name("admin.transaction.delete");
+        });
+    });
+
+    // Type
+    Route::prefix("jenis")->group(function() {
+        Route::controller(TypeController::class)->group(function() {
+            Route::get("/", "index")->name("admin.type.index");
+            Route::match(["get", "post"],"/buat", "create")->name("admin.type.create");
+            Route::match(["get", "post"],"/ubah/{id}", "update")->name("admin.type.update");
+            // Route::delete("/delete", "delete")->name("admin.type.delete");
         });
     });
 

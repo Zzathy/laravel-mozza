@@ -33,12 +33,13 @@ class ItemController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Update the specified resource in storage.
      *
-     * @param  \App\Models\Item  $item
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Item  $type
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, Item $item)
+    public function update(Request $request, Item $item)
     {
         if($request->isMethod("post")) {
             //
