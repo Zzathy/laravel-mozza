@@ -46,5 +46,15 @@ Route::prefix("admin")->group(function() {
             // Route::delete("/delete", "delete")->name("admin.transaction.delete");
         });
     });
+
+    // Unit
+    Route::prefix("satuan")->group(function() {
+        Route::controller(UnitController::class)->group(function() {
+            Route::get("/", "index")->name("admin.unit.index");
+            Route::match(["get", "post"],"/buat", "create")->name("admin.unit.create");
+            Route::match(["get", "post"],"/ubah/{id}", "update")->name("admin.unit.update");
+            // Route::delete("/delete", "delete")->name("admin.unit.delete");
+        });
+    });
 });
 // Item
