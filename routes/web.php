@@ -27,7 +27,7 @@ Route::prefix("admin")->group(function() {
     // Base
     Route::get('/', function () {
         return view("admin.index");
-    });
+    })->name("admin.index");
 
     // Item
     Route::prefix("barang")->group(function() {
