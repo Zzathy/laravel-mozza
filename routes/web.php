@@ -26,7 +26,7 @@ Route::get('/', function () {
 Route::prefix("admin")->group(function() {
     // Base
     Route::get('/', function () {
-        return view('index');
+        return view("admin.index");
     });
 
     // Item
