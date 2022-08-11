@@ -18,12 +18,10 @@
 
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
-            <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Tabel Data Barang</h6>
-            </div>
-            <div class="card-header py-3">
+            <div class="d-flex justify-content-between card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary align-self-center">Tabel Data Barang</h6>
                 <!-- Button trigger modal -->
-                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#createItem">
+                <button type="button float-right" class="btn btn-success" data-toggle="modal" data-target="#createItem">
                     Buat
                 </button>
             </div>
