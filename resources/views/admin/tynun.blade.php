@@ -165,16 +165,81 @@
                                             <td>
                                                 <!-- Button trigger modal -->
                                                 <button type="button" class="btn btn-warning btn-circle btn-sm"
-                                                    data-toggle="modal" data-target="#updateItem">
+                                                    data-toggle="modal" data-target="#updateUnit{{ $unit->id }}">
                                                     <i class="fas fa-pencil-alt"></i>
                                                 </button>
                                                 |
                                                 <button type="button" class="btn btn-danger btn-circle btn-sm"
-                                                    data-toggle="modal" data-target="#deleteItem">
+                                                    data-toggle="modal" data-target="#deleteUnit{{ $unit->id }}">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
                                             </td>
                                         </tr>
+
+                                        <!-- Unit Update Modal -->
+                                        <div class="modal fade" id="updateUnit{{ $unit->id }}"
+                                            data-backdrop="static" data-keyboard="false" tabindex="-1"
+                                            aria-labelledby="updateUnitLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="updateUnitLabel">Ubah Jenis</h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form action="{{ route('admin.tynun.update', $unit->id) }}"
+                                                            method="post">
+                                                            @csrf
+                                                            <input type="hidden" name="mode" value="unit">
+                                                            <div class="form-group">
+                                                                <label for="name">Nama Jenis</label>
+                                                                <input type="text" class="form-control" name="name"
+                                                                    id="name" value="{{ $unit->name }}">
+                                                            </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-warning">Ubah</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Unit Delete Modal -->
+                                        <div class="modal fade" id="deleteUnit{{ $unit->id }}"
+                                            data-backdrop="static" data-keyboard="false" tabindex="-1"
+                                            aria-labelledby="deleteUnitLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="deleteUnitLabel">Hapus Satuan</h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p>Apakah anda yakin ingin menghapus data ini?</p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-dismiss="modal">Close</button>
+                                                        <form action="{{ route('admin.tynun.delete', $unit->id) }}"
+                                                            method="post">
+                                                            @csrf
+                                                            @method('delete')
+                                                            <input type="hidden" name="mode" value="unit">
+                                                            <button type="submit" class="btn btn-danger">Hapus</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     @endforeach
                                 </tbody>
                             </table>
@@ -239,86 +304,6 @@
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-success">Buat</button>
                     </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal -->
-    <div class="modal fade" id="updateUnit" data-backdrop="static" data-keyboard="false" tabindex="-1"
-        aria-labelledby="updateUnitLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="updateUnitLabel">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="form-group">
-                            <label for="name">Nama Barang</label>
-                            <input type="text" class="form-control" name="name" id="name">
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="type">Jenis</label>
-                                <select id="type" class="form-control">
-                                    <option selected>Choose...</option>
-                                    <option>...</option>
-                                </select>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="unit">Satuan</label>
-                                <select id="unit" class="form-control">
-                                    <option selected>Choose...</option>
-                                    <option>...</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-4">
-                                <label for="base_price">Harga Pokok</label>
-                                <input type="number" class="form-control" name="base_price" id="base_price">
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label for="sell_price">Harga Jual</label>
-                                <input type="number" class="form-control" name="sell_price" id="sell_price">
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label for="stock">Stok</label>
-                                <input type="text" class="form-control" name="stock" id="stock">
-                            </div>
-                        </div>
-                        {{-- <button type="submit" class="btn btn-primary">Sign in</button> --}}
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-warning">Ubah</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal -->
-    <div class="modal fade" id="deleteUnit" data-backdrop="static" data-keyboard="false" tabindex="-1"
-        aria-labelledby="deleteUnitLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="deleteUnitLabel">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p>Apakah anda yakin ingin menghapus data ini?</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-danger">Hapus</button>
                 </div>
             </div>
         </div>

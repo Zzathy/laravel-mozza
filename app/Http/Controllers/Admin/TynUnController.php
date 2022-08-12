@@ -51,7 +51,9 @@ class TynUnController extends Controller
                 "name" => $request->name
             ]);
         } else {
-            //
+            Unit::where("id", $id)->update([
+                "name" => $request->name
+            ]);
         }
 
         return redirect()->route("admin.tynun.index");
@@ -63,7 +65,8 @@ class TynUnController extends Controller
             $type = Type::find($id);
             $type->delete();
         } else {
-
+            $unit = Unit::find($id);
+            $unit->delete();
         }
 
         return redirect()->route("admin.tynun.index");
