@@ -11,7 +11,7 @@
     <div class="container-fluid">
 
         <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800">Data Barang</h1>
+        <h1 class="h3 mb-2 text-gray-800">Data Jenis & Satuan</h1>
         <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
             For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official
                 DataTables documentation</a>.</p>
@@ -24,7 +24,7 @@
                         <h6 class="m-0 font-weight-bold text-primary align-self-center">Tabel Data Jenis</h6>
                         <!-- Button trigger modal -->
                         <button type="button float-right" class="btn btn-success" data-toggle="modal"
-                            data-target="#createItem">
+                            data-target="#createType">
                             Buat
                         </button>
                     </div>
@@ -44,21 +44,88 @@
                                     </tr>
                                 </tfoot>
                                 <tbody>
-                                    <tr>
-                                        <td>Airpump AP 226</td>
-                                        <td>
-                                            <!-- Button trigger modal -->
-                                            <button type="button" class="btn btn-warning btn-circle btn-sm"
-                                                data-toggle="modal" data-target="#updateItem">
-                                                <i class="fas fa-pencil-alt"></i>
-                                            </button>
-                                            |
-                                            <button type="button" class="btn btn-danger btn-circle btn-sm"
-                                                data-toggle="modal" data-target="#deleteItem">
-                                                <i class="fas fa-trash"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
+                                    @foreach ($types as $type)
+                                        <tr>
+                                            <td>{{ $type->name }}</td>
+                                            <td>
+                                                <!-- Button trigger modal -->
+                                                <button type="button" class="btn btn-warning btn-circle btn-sm"
+                                                    data-toggle="modal" data-target="#updateType{{ $type->id }}">
+                                                    <i class="fas fa-pencil-alt"></i>
+                                                </button>
+                                                |
+                                                <button type="button" class="btn btn-danger btn-circle btn-sm"
+                                                    data-toggle="modal" data-target="#deleteType{{ $type->id }}">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+
+                                        <!-- Type Update Modal -->
+                                        <div class="modal fade" id="updateType{{ $type->id }}" data-backdrop="static"
+                                            data-keyboard="false" tabindex="-1" aria-labelledby="updateTypeLabel"
+                                            aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="updateTypeLabel">Ubah Jenis</h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form action="{{ route('admin.tynun.update', $type->id) }}"
+                                                            method="post">
+                                                            @csrf
+                                                            <input type="hidden" name="mode" value="type">
+                                                            <div class="form-group">
+                                                                <label for="name">Nama Jenis</label>
+                                                                <input type="text" class="form-control" name="name"
+                                                                    id="name" value="{{ $type->name }}">
+                                                            </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-warning">Ubah</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Type Delete Modal -->
+                                        <div class="modal fade" id="deleteType{{ $type->id }}" data-backdrop="static"
+                                            data-keyboard="false" tabindex="-1" aria-labelledby="deleteTypeLabel"
+                                            aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="deleteTypeLabel">Hapus Jenis</h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p>Apakah anda yakin ingin menghapus data ini?</p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-dismiss="modal">Close</button>
+                                                        <form action="{{ route('admin.tynun.delete', $type->id) }}"
+                                                            method="post">
+                                                            @csrf
+                                                            @method('delete')
+                                                            <input type="hidden" name="mode" value="type">
+                                                            <button type="submit" class="btn btn-danger">Hapus</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -69,10 +136,10 @@
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
                     <div class="d-flex justify-content-between card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary align-self-center">Tabel Data Jenis</h6>
+                        <h6 class="m-0 font-weight-bold text-primary align-self-center">Tabel Data Satuan</h6>
                         <!-- Button trigger modal -->
                         <button type="button float-right" class="btn btn-success" data-toggle="modal"
-                            data-target="#createItem">
+                            data-target="#createUnit">
                             Buat
                         </button>
                     </div>
@@ -92,21 +159,23 @@
                                     </tr>
                                 </tfoot>
                                 <tbody>
-                                    <tr>
-                                        <td>Airpump AP 226</td>
-                                        <td>
-                                            <!-- Button trigger modal -->
-                                            <button type="button" class="btn btn-warning btn-circle btn-sm"
-                                                data-toggle="modal" data-target="#updateItem">
-                                                <i class="fas fa-pencil-alt"></i>
-                                            </button>
-                                            |
-                                            <button type="button" class="btn btn-danger btn-circle btn-sm"
-                                                data-toggle="modal" data-target="#deleteItem">
-                                                <i class="fas fa-trash"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
+                                    @foreach ($units as $unit)
+                                        <tr>
+                                            <td>{{ $unit->name }}</td>
+                                            <td>
+                                                <!-- Button trigger modal -->
+                                                <button type="button" class="btn btn-warning btn-circle btn-sm"
+                                                    data-toggle="modal" data-target="#updateItem">
+                                                    <i class="fas fa-pencil-alt"></i>
+                                                </button>
+                                                |
+                                                <button type="button" class="btn btn-danger btn-circle btn-sm"
+                                                    data-toggle="modal" data-target="#deleteItem">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -117,71 +186,71 @@
     </div>
     <!-- /.container-fluid -->
 
-    <!-- Modal -->
-    <div class="modal fade" id="createItem" data-backdrop="static" data-keyboard="false" tabindex="-1"
-        aria-labelledby="createItemLabel" aria-hidden="true">
+    <!-- Type Create Modal -->
+    <div class="modal fade" id="createType" data-backdrop="static" data-keyboard="false" tabindex="-1"
+        aria-labelledby="createTypeLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="createItemLabel">Modal title</h5>
+                    <h5 class="modal-title" id="createTypeLabel">Tambah Jenis</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form action="{{ route('admin.tynun.create') }}" method="post">
+                        @csrf
+                        <input type="hidden" name="mode" value="type">
                         <div class="form-group">
-                            <label for="name">Nama Barang</label>
+                            <label for="name">Nama Jenis</label>
                             <input type="text" class="form-control" name="name" id="name">
                         </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="type">Jenis</label>
-                                <select id="type" class="form-control">
-                                    <option selected>Choose...</option>
-                                    <option>...</option>
-                                </select>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="unit">Satuan</label>
-                                <select id="unit" class="form-control">
-                                    <option selected>Choose...</option>
-                                    <option>...</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-4">
-                                <label for="base_price">Harga Pokok</label>
-                                <input type="number" class="form-control" name="base_price" id="base_price">
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label for="sell_price">Harga Jual</label>
-                                <input type="number" class="form-control" name="sell_price" id="sell_price">
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label for="stock">Stok</label>
-                                <input type="text" class="form-control" name="stock" id="stock">
-                            </div>
-                        </div>
-                        {{-- <button type="submit" class="btn btn-primary">Sign in</button> --}}
-                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-success">Buat</button>
+                    <button type="submit" class="btn btn-success">Buat</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Unit Create Modal -->
+    <div class="modal fade" id="createUnit" data-backdrop="static" data-keyboard="false" tabindex="-1"
+        aria-labelledby="createUnitLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createUnitLabel">Tambah Satuan</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('admin.tynun.create') }}" method="post">
+                        @csrf
+                        <input type="hidden" name="mode" value="unit">
+                        <div class="form-group">
+                            <label for="name">Nama Satuan</label>
+                            <input type="text" class="form-control" name="name" id="name">
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-success">Buat</button>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="updateItem" data-backdrop="static" data-keyboard="false" tabindex="-1"
-        aria-labelledby="updateItemLabel" aria-hidden="true">
+    <div class="modal fade" id="updateUnit" data-backdrop="static" data-keyboard="false" tabindex="-1"
+        aria-labelledby="updateUnitLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="updateItemLabel">Modal title</h5>
+                    <h5 class="modal-title" id="updateUnitLabel">Modal title</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -234,12 +303,12 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="deleteItem" data-backdrop="static" data-keyboard="false" tabindex="-1"
-        aria-labelledby="deleteItemLabel" aria-hidden="true">
+    <div class="modal fade" id="deleteUnit" data-backdrop="static" data-keyboard="false" tabindex="-1"
+        aria-labelledby="deleteUnitLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="deleteItemLabel">Modal title</h5>
+                    <h5 class="modal-title" id="deleteUnitLabel">Modal title</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>

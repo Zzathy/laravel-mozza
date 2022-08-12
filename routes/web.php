@@ -74,9 +74,9 @@ Route::prefix("admin")->group(function() {
     Route::prefix("jenis-satuan")->group(function() {
         Route::controller(TynUnController::class)->group(function() {
             Route::get("/", "index")->name("admin.tynun.index");
-            Route::match(["get", "post"],"/buat", "create")->name("admin.tynun.create");
-            Route::match(["get", "post"],"/ubah/{id}", "update")->name("admin.tynun.update");
-            // Route::delete("/delete", "delete")->name("admin.tynun.delete");
+            Route::post("/buat", "create")->name("admin.tynun.create");
+            Route::post("/ubah/{id}", "update")->name("admin.tynun.update");
+            Route::delete("/hapus/{id}", "delete")->name("admin.tynun.delete");
         });
     });
 });

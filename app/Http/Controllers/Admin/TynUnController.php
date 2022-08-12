@@ -9,79 +9,63 @@ use Illuminate\Http\Request;
 
 class TynUnController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        return view("admin.tynun");
+        $types = Type::select("id", "name")->get();
+        $units = Unit::select("id", "name")->get();
+
+        $context = [
+            "types" => $types,
+            "units" => $units
+        ];
+        return view("admin.tynun", $context);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $request->validate([
+            "name" => "required"
+        ]);
+
+        if($request->get("mode") == "type") {
+            Type::create([
+                "name" => $request->name
+            ]);
+        } else {
+            Unit::create([
+                "name" => $request->name
+            ]);
+        }
+
+        return redirect()->route("admin.tynun.index");
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            "name" => "required"
+        ]);
+
+        if($request->get("mode") == "type") {
+            Type::where("id", $id)->update([
+                "name" => $request->name
+            ]);
+        } else {
+            //
+        }
+
+        return redirect()->route("admin.tynun.index");
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function delete(Request $request, $id)
     {
-        //
+        if($request->get("mode") == "type") {
+            $type = Type::find($id);
+            $type->delete();
+        } else {
+
+        }
+
+        return redirect()->route("admin.tynun.index");
     }
 }
