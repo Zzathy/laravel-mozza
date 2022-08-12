@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\ItemController;
 use App\Http\Controllers\Admin\TransactionController;
 use App\Http\Controllers\Admin\TypeController;
 use App\Http\Controllers\Admin\UnitController;
+use App\Http\Controllers\Admin\TynUnController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,23 +50,13 @@ Route::prefix("admin")->group(function() {
         });
     });
 
-    // Type
-    Route::prefix("jenis")->group(function() {
-        Route::controller(TypeController::class)->group(function() {
-            Route::get("/", "index")->name("admin.type.index");
-            Route::match(["get", "post"],"/buat", "create")->name("admin.type.create");
-            Route::match(["get", "post"],"/ubah/{id}", "update")->name("admin.type.update");
-            // Route::delete("/delete", "delete")->name("admin.type.delete");
-        });
-    });
-
-    // Unit
-    Route::prefix("satuan")->group(function() {
-        Route::controller(UnitController::class)->group(function() {
-            Route::get("/", "index")->name("admin.unit.index");
-            Route::match(["get", "post"],"/buat", "create")->name("admin.unit.create");
-            Route::match(["get", "post"],"/ubah/{id}", "update")->name("admin.unit.update");
-            // Route::delete("/delete", "delete")->name("admin.unit.delete");
+    // Type and Unit
+    Route::prefix("jenis-satuan")->group(function() {
+        Route::controller(TynUnController::class)->group(function() {
+            Route::get("/", "index")->name("admin.tynun.index");
+            Route::post("/buat", "create")->name("admin.tynun.create");
+            Route::post("/ubah/{id}", "update")->name("admin.tynun.update");
+            Route::delete("/hapus/{id}", "delete")->name("admin.tynun.delete");
         });
     });
 });
