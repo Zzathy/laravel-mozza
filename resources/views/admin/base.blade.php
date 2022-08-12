@@ -66,18 +66,11 @@
                     <span>Barang</span></a>
             </li>
 
-            <!-- Nav Type - Tables -->
+            <!-- Nav Type and Unit - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('admin.type.index') }}">
+                <a class="nav-link" href="{{ route('admin.tynun.index') }}">
                     <i class="fas fa-fw fa-table"></i>
-                    <span>Jenis</span></a>
-            </li>
-
-            <!-- Nav Unit - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('admin.unit.index') }}">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Satuan</span></a>
+                    <span>Jenis & Satuan</span></a>
             </li>
 
             <!-- Divider -->
