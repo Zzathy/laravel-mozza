@@ -34,9 +34,9 @@ Route::prefix("admin")->group(function() {
     Route::prefix("barang")->group(function() {
         Route::controller(ItemController::class)->group(function() {
             Route::get("/", "index")->name("admin.item.index");
-            Route::match(["get", "post"],"/buat", "create")->name("admin.item.create");
-            Route::match(["get", "post"],"/ubah/{id}", "update")->name("admin.item.update");
-            // Route::delete("/delete", "delete")->name("admin.item.delete");
+            Route::post("/buat", "create")->name("admin.item.create");
+            Route::post("/ubah/{id}", "update")->name("admin.item.update");
+            Route::delete("/hapus/{id}", "delete")->name("admin.item.delete");
         });
     });
 
