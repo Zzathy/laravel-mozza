@@ -44,8 +44,8 @@ Route::prefix("admin")->group(function() {
     Route::prefix("transaksi")->group(function() {
         Route::controller(TransactionController::class)->group(function() {
             Route::get("/", "index")->name("admin.transaction.index");
-            Route::match(["get", "post"],"/buat", "create")->name("admin.transaction.create");
-            Route::match(["get", "post"],"/ubah/{id}", "update")->name("admin.transaction.update");
+            Route::post("/buat", "create")->name("admin.transaction.create");
+            Route::match(["get", "post"],"update")->name("admin.transaction.update");
             // Route::delete("/delete", "delete")->name("admin.transaction.delete");
         });
     });
