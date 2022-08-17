@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\TransactionController;
 use App\Http\Controllers\Admin\TypeController;
 use App\Http\Controllers\Admin\UnitController;
 use App\Http\Controllers\Admin\TynUnController;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +22,12 @@ use App\Http\Controllers\Admin\TynUnController;
 // Base
 Route::get('/', function () {
     return view('welcome');
+});
+
+// Test PDF
+Route::get("/pdf", function () {
+    $pdf = PDF::loadView("pdf");
+    return $pdf->stream();
 });
 
 // Admin
@@ -60,4 +67,3 @@ Route::prefix("admin")->group(function() {
         });
     });
 });
-// Item
