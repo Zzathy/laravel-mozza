@@ -45,10 +45,17 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
+            <li class="nav-item @yield('index')">
                 <a class="nav-link" href="{{ route('admin.index') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
+            </li>
+
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item @yield('transaction')">
+                <a class="nav-link" href="{{ route('admin.index') }}">
+                    <i class="fas fa-fw fa-shopping-cart"></i>
+                    <span>Transaksi</span></a>
             </li>
 
             <!-- Divider -->
@@ -60,14 +67,14 @@
             </div>
 
             <!-- Nav Item - Tables -->
-            <li class="nav-item">
+            <li class="nav-item @yield('item')">
                 <a class="nav-link" href="{{ route('admin.item.index') }}">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Barang</span></a>
             </li>
 
             <!-- Nav Type and Unit - Tables -->
-            <li class="nav-item">
+            <li class="nav-item @yield('tynun')">
                 <a class="nav-link" href="{{ route('admin.tynun.index') }}">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Jenis & Satuan</span></a>

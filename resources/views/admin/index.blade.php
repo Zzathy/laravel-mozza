@@ -1,6 +1,7 @@
 @extends('admin.base')
 
 @section('title', 'Admin')
+@section('index', 'active')
 
 @section('content')
     <!-- Begin Page Content -->

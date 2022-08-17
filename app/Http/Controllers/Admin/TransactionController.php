@@ -44,7 +44,6 @@ class TransactionController extends Controller
             }
 
             Transaction::create([
-                "code" => $request->code,
                 "quantity" => $request->quantity[$i],
                 "item" => $request->item[$i],
                 "discount" => $discount,

@@ -1,6 +1,7 @@
 @extends('admin.base')
 
 @section('title', 'Barang')
+@section('item', 'active')
 
 @section('css')
     <link href="{{ asset('vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
@@ -32,7 +33,6 @@
                             <tr>
                                 <th>Nama</th>
                                 <th>Jenis</th>
-                                <th>Satuan</th>
                                 <th>Harga Pokok</th>
                                 <th>Harga Jual</th>
                                 <th>Stok</th>
@@ -43,7 +43,6 @@
                             <tr>
                                 <th>Nama</th>
                                 <th>Jenis</th>
-                                <th>Satuan</th>
                                 <th>Harga Pokok</th>
                                 <th>Harga Jual</th>
                                 <th>Stok</th>
@@ -55,10 +54,9 @@
                                 <tr>
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->type_name }}</td>
-                                    <td>{{ $item->unit_name }}</td>
                                     <td>{{ $item->base_price }}</td>
                                     <td>{{ $item->sell_price }}</td>
-                                    <td>{{ $item->stock }}</td>
+                                    <td>{{ $item->stock . '' . strtolower($item->unit_name) }}</td>
                                     <td>
                                         <!-- Button trigger modal -->
                                         <button type="button" class="btn btn-warning btn-circle btn-sm" data-toggle="modal"

@@ -1,6 +1,7 @@
 @extends('admin.base')
 
 @section('title', 'Barang')
+@section('tynun', 'active')
 
 @section('css')
     <link href="{{ asset('vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
