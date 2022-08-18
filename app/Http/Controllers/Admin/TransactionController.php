@@ -23,11 +23,14 @@ class TransactionController extends Controller
             }
         }
 
+        $items = Item::all();
+
         $count += 1;
 
         $context = [
             "count" => $count,
-            "transactions" => $transactions
+            "transactions" => $transactions,
+            "items" => $items
         ];
 
         return view("admin.transaction", $context);
@@ -35,7 +38,12 @@ class TransactionController extends Controller
     public function create(Request $request)
     {
         for($i = 0; $i < count($request->item); $i++) {
-            $item = Item::find($request->item[$i]);
+            $name = explode(" | ", $request->item[$i])[0];
+            $item = Item::firstWhere("name", $name);
+
+            if($item == null) {
+                continue;
+            }
 
             if($i == 0 && $request->discount != null) {
                 $discount = $request->discount;
@@ -45,7 +53,7 @@ class TransactionController extends Controller
 
             Transaction::create([
                 "quantity" => $request->quantity[$i],
-                "item" => $request->item[$i],
+                "item" => $item->id,
                 "discount" => $discount,
                 "total" => $item->sell_price * $request->quantity[$i]
             ]);
