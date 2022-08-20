@@ -19,34 +19,34 @@
 
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
-            <div class="d-flex justify-content-between card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary align-self-center">Tabel Data Barang</h6>
-                <!-- Button trigger modal -->
-                <button type="button float-right" class="btn btn-success" data-toggle="modal" data-target="#createItem">
-                    Buat
-                </button>
-            </div>
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
-                                <th>Banyak</th>
                                 <th>Nama | Harga</th>
+                                <th>Banyak</th>
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
-                                <th>Banyak</th>
                                 <th>Nama | Harga</th>
+                                <th>Banyak</th>
                             </tr>
                         </tfoot>
                         <tbody>
+                            @foreach ($transactions as $transaction)
+                                @for ($i = 0; $i < count($transaction); $i++)
+                                    <tr>
+                                        <td>{{ $transaction[$i]->item }}</td>
+                                        <td>{{ $transaction[$i]->quantity }}</td>
+                                    </tr>
+                                @endfor
+                            @endforeach
                             <form action="{{ route('admin.transaction.create') }}" method="post">
                                 @csrf
                                 @for ($i = 0; $i < 5; $i++)
                                     <tr>
-                                        <td><input type="number" name="quantity[]" class="form-control"></td>
                                         <td>
                                             <input class="form-control" list="datalistOptions" name="item[]"
                                                 placeholder="Type to search...">
@@ -56,10 +56,11 @@
                                                 @endforeach
                                             </datalist>
                                         </td>
+                                        <td><input type="number" name="quantity[]" class="form-control"></td>
                                     </tr>
                                 @endfor
                                 <tr>
-                                    <td colspan="2"><button type="submit">Tambah</button></td>
+                                    <td colspan="2"><button type="submit" class="btn btn-success">Tambah</button></td>
                                 </tr>
                             </form>
                             {{-- @foreach ($items as $item)
