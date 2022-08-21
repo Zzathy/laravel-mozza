@@ -6,7 +6,9 @@ use App\Http\Controllers\Admin\TransactionController;
 use App\Http\Controllers\Admin\TypeController;
 use App\Http\Controllers\Admin\UnitController;
 use App\Http\Controllers\Admin\TynUnController;
+use App\Models\Transaction;
 use Barryvdh\DomPDF\Facade\Pdf;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +28,18 @@ Route::get('/', function () {
 
 // Test PDF
 Route::get("/pdf", function () {
+    // Get all Transactions data
+    $transactions = Transaction::all();
+    dd($transactions);
+
+    // Get created_at that can't duplicated
+    $created = DB::table("transactions")->distinct()->pluck("created_at");
+    dd($created);
+
+    // Get first data where the created_at is same
+    $transaction = Transaction::where("created_at", "2022-08-16 15:05:15")->get();
+    dd($transaction);
+
     $pdf = PDF::loadView("pdf");
     return $pdf->stream();
 });
