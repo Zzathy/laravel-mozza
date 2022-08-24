@@ -56,7 +56,8 @@
                                                 @endforeach
                                             </datalist>
                                         </td>
-                                        <td><input type="number" name="quantity[]" class="form-control"></td>
+                                        <td><input type="number" name="quantity[]" step="0.1" class="form-control">
+                                        </td>
                                     </tr>
                                 @endfor
                                 <tr>

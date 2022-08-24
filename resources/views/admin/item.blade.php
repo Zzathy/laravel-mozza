@@ -129,8 +129,8 @@
                                                         </div>
                                                         <div class="form-group col-md-4">
                                                             <label for="stock">Stok</label>
-                                                            <input type="text" class="form-control" name="stock"
-                                                                id="stock" value="{{ $item->stock }}">
+                                                            <input type="number" class="form-control" name="stock"
+                                                                id="stock" step="0.1" value="{{ $item->stock }}">
                                                         </div>
                                                     </div>
                                             </div>
@@ -233,7 +233,8 @@
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="stock">Stok</label>
-                                <input type="text" class="form-control" name="stock" id="stock">
+                                <input type="number" class="form-control" name="stock" id="stock"
+                                    step="0.1">
                             </div>
                         </div>
                 </div>
