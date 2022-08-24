@@ -90,7 +90,7 @@
                                                     <div class="form-group">
                                                         <label for="name">Nama Barang</label>
                                                         <input type="text" class="form-control" name="name"
-                                                            id="name" value="{{ $item->name }}">
+                                                            id="name" value="{{ $item->name }}" autocomplete="off">
                                                     </div>
                                                     <div class="form-row">
                                                         <div class="form-group col-md-6">
@@ -199,7 +199,8 @@
                         @csrf
                         <div class="form-group">
                             <label for="name">Nama Barang</label>
-                            <input type="text" class="form-control" name="name" id="name">
+                            <input type="text" class="form-control" name="name" id="name"
+                                autocomplete="off">
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">

@@ -83,7 +83,8 @@
                                                             <div class="form-group">
                                                                 <label for="name">Nama Jenis</label>
                                                                 <input type="text" class="form-control" name="name"
-                                                                    id="name" value="{{ $type->name }}">
+                                                                    id="name" value="{{ $type->name }}"
+                                                                    autocomplete="off">
                                                             </div>
                                                     </div>
                                                     <div class="modal-footer">
@@ -198,7 +199,8 @@
                                                             <div class="form-group">
                                                                 <label for="name">Nama Jenis</label>
                                                                 <input type="text" class="form-control" name="name"
-                                                                    id="name" value="{{ $unit->name }}">
+                                                                    id="name" value="{{ $unit->name }}"
+                                                                    autocomplete="off">
                                                             </div>
                                                     </div>
                                                     <div class="modal-footer">
@@ -269,7 +271,8 @@
                         <input type="hidden" name="mode" value="type">
                         <div class="form-group">
                             <label for="name">Nama Jenis</label>
-                            <input type="text" class="form-control" name="name" id="name">
+                            <input type="text" class="form-control" name="name" id="name"
+                                autocomplete="off">
                         </div>
                 </div>
                 <div class="modal-footer">
@@ -298,7 +301,8 @@
                         <input type="hidden" name="mode" value="unit">
                         <div class="form-group">
                             <label for="name">Nama Satuan</label>
-                            <input type="text" class="form-control" name="name" id="name">
+                            <input type="text" class="form-control" name="name" id="name"
+                                autocomplete="off">
                         </div>
                 </div>
                 <div class="modal-footer">
