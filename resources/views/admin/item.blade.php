@@ -53,10 +53,10 @@
                             @foreach ($items as $item)
                                 <tr>
                                     <td>{{ $item->name }}</td>
-                                    <td>{{ $item->type_name }}</td>
+                                    <td>{{ $item->type->name }}</td>
                                     <td>{{ $item->base_price }}</td>
                                     <td>{{ $item->sell_price }}</td>
-                                    <td>{{ $item->stock . '' . strtolower($item->unit_name) }}</td>
+                                    <td>{{ $item->stock . '' . strtolower($item->unit->name) }}</td>
                                     <td>
                                         <!-- Button trigger modal -->
                                         <button type="button" class="btn btn-warning btn-circle btn-sm" data-toggle="modal"
@@ -99,7 +99,7 @@
                                                                 <option>Choose...</option>
                                                                 @foreach ($types as $type)
                                                                     <option value="{{ $type->id }}"
-                                                                        {{ $type->id == $item->type ? 'selected' : '' }}>
+                                                                        {{ $type->id == $item->type_id ? 'selected' : '' }}>
                                                                         {{ $type->name }}</option>
                                                                 @endforeach
                                                             </select>
@@ -110,7 +110,7 @@
                                                                 <option>Choose...</option>
                                                                 @foreach ($units as $unit)
                                                                     <option value="{{ $unit->id }}"
-                                                                        {{ $unit->id == $item->unit ? 'selected' : '' }}>
+                                                                        {{ $unit->id == $item->unit_id ? 'selected' : '' }}>
                                                                         {{ $unit->name }}</option>
                                                                 @endforeach
                                                             </select>

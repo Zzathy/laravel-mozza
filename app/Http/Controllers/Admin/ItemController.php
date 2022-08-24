@@ -13,12 +13,7 @@ class ItemController extends Controller
 {
     public function index()
     {
-        $items = DB::table("items")
-                    ->join("types", "items.type", "=", "types.id")
-                    ->join("units", "items.unit", "=", "units.id")
-                    ->select("items.*", "types.name as type_name", "units.name as unit_name")
-                    ->get();
-
+        $items = Item::with("type", "unit")->get();
         $types = Type::select("id", "name")->get();
         $units = Unit::select("id", "name")->get();
 
@@ -43,8 +38,8 @@ class ItemController extends Controller
 
         Item::create([
             "name" => $request->name,
-            "type" => $request->type,
-            "unit" => $request->unit,
+            "type_id" => $request->type,
+            "unit_id" => $request->unit,
             "base_price" => $request->base_price,
             "sell_price" => $request->sell_price,
             "stock" => $request->stock
@@ -66,8 +61,8 @@ class ItemController extends Controller
 
         Item::where("id", $id)->update([
             "name" => $request->name,
-            "type" => $request->type,
-            "unit" => $request->unit,
+            "type_id" => $request->type,
+            "unit_id" => $request->unit,
             "base_price" => $request->base_price,
             "sell_price" => $request->sell_price,
             "stock" => $request->stock
