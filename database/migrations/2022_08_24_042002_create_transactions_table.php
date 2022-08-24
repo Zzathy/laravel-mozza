@@ -15,11 +15,9 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->float("quantity");
-
             $table->unsignedBigInteger('item_id');
             $table->foreign('item_id')->references('id')->on('items');
-
+            $table->float("quantity");
             $table->integer("discount");
             $table->integer("total");
             $table->timestamps();
