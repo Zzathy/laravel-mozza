@@ -53,7 +53,7 @@ class TransactionController extends Controller
 
             Transaction::create([
                 "quantity" => $request->quantity[$i],
-                "item" => $item->id,
+                "item_id" => $item->id,
                 "discount" => $discount,
                 "total" => $item->sell_price * $request->quantity[$i]
             ]);
