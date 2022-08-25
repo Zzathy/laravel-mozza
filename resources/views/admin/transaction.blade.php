@@ -49,7 +49,7 @@
                                     <tr>
                                         <td>
                                             <input class="form-control" list="datalistOptions" name="item[]"
-                                                placeholder="Type to search...">
+                                                placeholder="Type to search..." autocomplete="off">
                                             <datalist id="datalistOptions">
                                                 @foreach ($items as $item)
                                                     <option value="{{ $item->name . ' | ' . $item->sell_price }}">
