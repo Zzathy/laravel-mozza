@@ -45,7 +45,7 @@ Route::get("/pdf", function () {
 });
 
 // Admin
-Route::prefix("admin")->group(function() {
+// Route::prefix("admin")->group(function() {
     // Base
     Route::get('/', function () {
         return view("admin.index");
@@ -80,4 +80,4 @@ Route::prefix("admin")->group(function() {
             Route::delete("/hapus/{id}", "delete")->name("admin.tynun.delete");
         });
     });
-});
+// });
