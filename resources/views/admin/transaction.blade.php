@@ -38,7 +38,8 @@
                             @foreach ($transactions as $transaction)
                                 @for ($i = 0; $i < count($transaction); $i++)
                                     <tr>
-                                        <td>{{ $transaction[$i]->item }}</td>
+                                        <td>{{ $transaction[$i]->item->name . ' | ' . $transaction[$i]->item->sell_price }}
+                                        </td>
                                         <td>{{ $transaction[$i]->quantity }}</td>
                                     </tr>
                                 @endfor
